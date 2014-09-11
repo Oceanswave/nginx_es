@@ -1,4 +1,4 @@
 nginx_es
 ========
 
-Simple nginx reverse proxy for Elastic Search
+Dockerfile for a simple nginx reverse proxy for Elastic Search
