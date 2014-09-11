@@ -12,12 +12,9 @@ RUN rm -v /etc/nginx/nginx.conf
 
 # Mount nginx config
 ADD nginx.conf /etc/nginx/
-ADD nginx_es.conf /etc/nginx/
-ADD nginx_cors.conf /etc/nginx/
-ADD nginx_deny.conf /etc/nginx/
 
 # Define mountable directories.
-VOLUME ["/var/log/nginx", "/var/www/es", "/var/www/es_public"]
+VOLUME ["/var/www/es"]
 
 # Define working directory.
 WORKDIR /etc/nginx
@@ -27,6 +24,12 @@ WORKDIR /etc/nginx
 #   - 443: HTTPS
 EXPOSE 80
 EXPOSE 443
+
+# Mount startup script
+ADD startup.sh /opt/
+
+# Make the startup script executable
+RUN chmod +x /opt/startup.sh
 
 # Define default command - script to modify nginx config and start nginx
 ENTRYPOINT ["/opt/startup.sh"]
